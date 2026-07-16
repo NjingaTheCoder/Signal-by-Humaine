@@ -1,8 +1,9 @@
 import csv
 import io
+from collections.abc import Callable
 from datetime import datetime, timezone
 
-from fastapi import APIRouter, Depends, Form, Request
+from fastapi import APIRouter, BackgroundTasks, Depends, Form, HTTPException, Request
 from fastapi.responses import HTMLResponse, RedirectResponse, StreamingResponse
 from fastapi.templating import Jinja2Templates
 from sqlalchemy import func, select
@@ -11,9 +12,29 @@ from sqlalchemy.orm import Session
 from app.admin.auth import require_admin
 from app.db import get_db
 from app.models import Briefing, JobPosting, JobRun, SourceHealth, Subscriber
+from app.scheduler import tracked_job
 
 router = APIRouter(dependencies=[Depends(require_admin)])
 templates = Jinja2Templates(directory="app/admin/templates")
+
+# Ordered so the health page lists them in a sensible reading order. Kept as a plain
+# name -> callable-loader map (rather than importing everything at module load time)
+# to avoid pulling every ingest module into every admin request.
+def _job_dispatch() -> dict[str, Callable]:
+    from app.classify import classify_batch
+    from app.ingest import blog, funding, jobs, news, quotes, tenders
+
+    return {
+        "ingest_news": news.ingest_news,
+        "ingest_quotes": quotes.ingest_quotes,
+        "ingest_tenders_uk": tenders.ingest_tenders_uk,
+        "ingest_tenders_intl": tenders.ingest_tenders_intl,
+        "ingest_funding": funding.ingest_funding,
+        "ingest_blog": blog.ingest_blog,
+        "ingest_jobs": jobs.ingest_jobs,
+        "classify_batch": classify_batch,
+        "briefing_draftpack": news.briefing_draftpack,
+    }
 
 
 @router.get("/", response_class=HTMLResponse)
@@ -91,7 +112,23 @@ def jobs_board_toggle(job_id: int, db: Session = Depends(get_db)):
 def health_view(request: Request, db: Session = Depends(get_db)):
     runs = db.scalars(select(JobRun).order_by(JobRun.started.desc()).limit(20)).all()
     sources = db.scalars(select(SourceHealth).order_by(SourceHealth.source)).all()
-    return templates.TemplateResponse(request, "health.html", {"runs": runs, "sources": sources})
+    return templates.TemplateResponse(
+        request,
+        "health.html",
+        {"runs": runs, "sources": sources, "job_names": list(_job_dispatch().keys())},
+    )
+
+
+@router.post("/health/run/{job_name}")
+def health_run_job(job_name: str, background_tasks: BackgroundTasks):
+    fn = _job_dispatch().get(job_name)
+    if fn is None:
+        raise HTTPException(status_code=404, detail=f"Unknown job: {job_name}")
+    # Runs after this request returns, inside the deployed service (where the internal
+    # DB connection already works) rather than blocking the admin page on a job that can
+    # take up to a minute or two.
+    background_tasks.add_task(tracked_job(job_name)(fn))
+    return RedirectResponse(url=f"/admin/health?triggered={job_name}", status_code=303)
 
 
 @router.get("/subscribers", response_class=HTMLResponse)

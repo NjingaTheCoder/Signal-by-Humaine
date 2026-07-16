@@ -1,5 +1,24 @@
 {% extends "_base.html" %}
 {% block content %}
+{% if request.query_params.get("triggered") %}
+<p class="ok">Triggered "{{ request.query_params.get("triggered") }}" — it's running in the
+background now. Refresh in a bit to see it appear below.</p>
+{% endif %}
+
+<h1>Run a job now</h1>
+<p style="color:#666;font-size:14px;">
+  Useful right after a fresh deploy, since the scheduled cron times may not roll around
+  again until tomorrow (or next Monday for the weekly ones). Runs inside this service, so
+  it uses the same database connection the app already has — no local setup needed.
+</p>
+<div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px;">
+{% for name in job_names %}
+  <form method="post" action="/admin/health/run/{{ name }}">
+    <button type="submit">{{ name }}</button>
+  </form>
+{% endfor %}
+</div>
+
 <h1>Job runs (last 20)</h1>
 <table>
 <tr><th>Job</th><th>Started</th><th>Finished</th><th>Rows</th><th>OK</th><th>Error</th></tr>
