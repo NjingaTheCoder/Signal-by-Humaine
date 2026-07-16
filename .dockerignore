@@ -1,0 +1,9 @@
+.git
+backend/.venv
+backend/app/static
+backend/**/__pycache__
+web/node_modules
+web/public/fonts/*.ttf
+*.pyc
+.env
+.env.local

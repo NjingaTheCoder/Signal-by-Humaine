@@ -1,7 +1,0 @@
-# Explicit provider setup for Railway/Nixpacks — required because this is a monorepo with
-# no package.json or requirements.txt at the repo root, so Nixpacks can't auto-detect that
-# it needs both Python and Node. Using the built-in "python" and "node" providers (rather
-# than raw nixPkgs) so pip/venv get set up correctly — Nix's bare python3XX package does NOT
-# include a `pip` binary on PATH by default, which is why the first deploy failed with
-# "pip: command not found". railway.json still controls the actual build/start commands.
-providers = ["node", "python"]
