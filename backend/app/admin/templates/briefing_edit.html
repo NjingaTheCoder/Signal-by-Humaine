@@ -1,0 +1,24 @@
+{% extends "_base.html" %}
+{% block content %}
+<h1>Briefing #{{ b.number }} — {{ b.week_of }} ({{ b.status }})</h1>
+<p style="color:#666;font-size:14px;">
+  One bullet per line, starting with "- ". Use <code>[text](url)</code> to make a bullet link
+  back to its source — it renders as a clickable reference on the live site.
+</p>
+<form method="post" action="/admin/briefings/{{ b.id }}">
+  <label>Headline</label>
+  <input name="headline" value="{{ b.headline }}">
+  <label>Three things that moved</label>
+  <textarea name="section_moved" rows="5">{{ b.section_moved }}</textarea>
+  <label>On the tape</label>
+  <textarea name="section_tape" rows="5">{{ b.section_tape }}</textarea>
+  <label>What we're watching next</label>
+  <textarea name="section_next" rows="5">{{ b.section_next }}</textarea>
+  <label>Benchmark value</label>
+  <input name="benchmark_value" value="{{ b.benchmark_value or '' }}">
+  <label>Benchmark label</label>
+  <input name="benchmark_label" value="{{ b.benchmark_label or '' }}">
+  <button type="submit" name="publish" value="0">Save draft</button>
+  <button type="submit" name="publish" value="1">Publish</button>
+</form>
+{% endblock %}

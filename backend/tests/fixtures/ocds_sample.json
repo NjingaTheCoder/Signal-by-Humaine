@@ -1,0 +1,77 @@
+{
+  "releases": [
+    {
+      "ocid": "ocds-test-0001",
+      "id": "56fbe42c-0e0c-47d2-aeb5-b51505b8cd86-854313",
+      "date": "2026-07-08T10:00:00Z",
+      "buyer": { "name": "Test Council" },
+      "tender": {
+        "title": "Provision of Digital Marketing and Social Media Campaign Services",
+        "description": "The council seeks an agency to run a brand awareness campaign.",
+        "status": "tender",
+        "value": { "amount": 150000, "currency": "GBP" },
+        "classification": { "id": "79341400", "description": "Advertising campaign services" },
+        "items": [
+          { "classification": { "id": "79341000", "description": "Advertising services" } },
+          { "classification": { "id": "72000000", "description": "IT services" } }
+        ],
+        "tenderPeriod": { "endDate": "2026-08-01T00:00:00Z" },
+        "documents": [
+          {
+            "id": "1",
+            "documentType": "tenderNotice",
+            "url": "https://www.contractsfinder.service.gov.uk/Notice/56fbe42c-0e0c-47d2-aeb5-b51505b8cd86"
+          },
+          {
+            "id": "2",
+            "documentType": "tenderNotice",
+            "url": "https://www.mytenders.co.uk/search/show/search_view.aspx?ID=JUL170014"
+          }
+        ]
+      }
+    },
+    {
+      "ocid": "ocds-test-0005",
+      "id": "039768-2025",
+      "date": "2026-07-08T13:00:00Z",
+      "buyer": { "name": "Find a Tender Test Buyer" },
+      "tender": {
+        "title": "CRM and Marketing Automation Platform Framework",
+        "description": "Framework for CRM and marketing automation services.",
+        "status": "tender",
+        "value": { "amount": 500000, "currency": "GBP" },
+        "classification": { "id": "79341000" },
+        "items": [],
+        "tenderPeriod": { "endDate": "2026-09-01T00:00:00Z" }
+      }
+    },
+    {
+      "ocid": "ocds-test-0002",
+      "date": "2026-07-08T11:00:00Z",
+      "buyer": { "name": "Another Authority" },
+      "tender": {
+        "title": "Supply of Office Furniture",
+        "description": "Desks and chairs for a new office.",
+        "status": "tender",
+        "value": { "amount": 50000, "currency": "GBP" },
+        "classification": { "id": "39130000" },
+        "items": [],
+        "tenderPeriod": {}
+      }
+    },
+    {
+      "ocid": "ocds-test-0003",
+      "date": "2026-07-08T12:00:00Z",
+      "buyer": {},
+      "tender": {
+        "title": "CRM System Implementation for Customer Engagement",
+        "status": "planning"
+      }
+    },
+    {
+      "ocid": "ocds-test-0004",
+      "date": null,
+      "tender": {}
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+.wrapper {
+  position: relative;
+}
+
+.locked {
+  max-height: 260px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.locked::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 140px;
+  background: linear-gradient(to bottom, rgba(249, 249, 249, 0), var(--base));
+  pointer-events: none;
+}
+
+.unlockHint {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--contrast);
+  color: var(--base-2);
+  padding: 8px 18px;
+  border-radius: var(--radius-pill);
+  font-size: var(--fs-small);
+  z-index: 1;
+}

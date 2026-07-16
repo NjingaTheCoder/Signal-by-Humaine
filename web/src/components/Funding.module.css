@@ -1,0 +1,99 @@
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.windowChips {
+  display: flex;
+  gap: 8px;
+}
+
+.chip {
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--accent-grey);
+  background: var(--base-2);
+  font-size: var(--fs-small);
+  cursor: pointer;
+}
+
+.chipActive {
+  background: var(--contrast);
+  color: var(--base-2);
+  border-color: var(--contrast);
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+@media (max-width: 720px) {
+  .statsGrid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.statCard {
+  background: var(--base-2);
+  border: 1px solid var(--border-hairline);
+  border-radius: var(--radius-card);
+  padding: 16px;
+}
+
+.statLabel {
+  font-size: 0.75rem;
+  color: var(--contrast-3);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+
+.statValue {
+  font-family: var(--font-mono);
+  font-size: var(--fs-large);
+}
+
+.empty {
+  padding: 40px 24px;
+  text-align: center;
+  color: var(--contrast-3);
+  background: var(--base-2);
+  border: 1px solid var(--border-hairline);
+  border-radius: var(--radius-card);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th {
+  text-align: left;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--contrast-3);
+  padding: 8px;
+  border-bottom: 1px solid var(--border-hairline);
+}
+
+.table td {
+  padding: 12px 8px;
+  border-bottom: 1px solid var(--border-hairline);
+  font-size: var(--fs-small);
+}
+
+.amount {
+  font-family: var(--font-mono);
+}
+
+@media (max-width: 720px) {
+  .table thead { display: none; }
+  .table, .table tbody, .table tr, .table td { display: block; width: 100%; }
+  .table tr { border-bottom: 1px solid var(--border-hairline); padding: 12px 0; }
+  .table td { border: none; padding: 2px 0; }
+}

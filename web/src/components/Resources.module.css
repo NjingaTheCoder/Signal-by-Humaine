@@ -1,0 +1,27 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  background: var(--base-2);
+  border: 1px solid var(--border-hairline);
+  border-radius: var(--radius-card);
+  padding: 20px;
+  box-shadow: var(--shadow-card);
+  text-decoration: none;
+  display: block;
+  color: var(--contrast);
+}
+
+.title {
+  font-weight: 500;
+  font-size: var(--fs-medium);
+  margin-bottom: 8px;
+}
+
+.excerpt {
+  font-size: var(--fs-small);
+  color: var(--contrast-2);
+}

@@ -1,0 +1,6 @@
+# Explicit provider setup for Railway/Nixpacks — required because this is a monorepo with
+# no package.json or requirements.txt at the repo root, so Nixpacks can't auto-detect that
+# it needs both Python and Node. railway.json still controls the actual build/start commands;
+# this file only guarantees both runtimes exist in the image.
+[phases.setup]
+nixPkgs = ["python312", "nodejs_20"]

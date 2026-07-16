@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Signal Admin</title>
+  <style>
+    body { font-family: -apple-system, "Segoe UI", sans-serif; background:#f9f9f9; color:#111; margin:0; }
+    nav { background:#111; padding:12px 24px; display:flex; gap:16px; }
+    nav a { color:#fff; text-decoration:none; font-size:14px; }
+    main { padding:24px; max-width:960px; margin:0 auto; }
+    table { width:100%; border-collapse:collapse; margin-top:12px; }
+    th, td { text-align:left; padding:8px; border-bottom:1px solid #eaeaea; font-size:14px; }
+    input, textarea { width:100%; padding:8px; margin-bottom:12px; border:1px solid #d2d2d2; border-radius:8px; font-family:inherit; }
+    button { background:#d1007a; color:#fff; border:none; padding:8px 16px; border-radius:9999px; cursor:pointer; }
+    .ok { color:green; } .fail { color:#c00; }
+  </style>
+</head>
+<body>
+<nav>
+  <a href="/admin/">Dashboard</a>
+  <a href="/admin/briefings">Briefings</a>
+  <a href="/admin/jobs-board">Jobs board</a>
+  <a href="/admin/health">Health</a>
+  <a href="/admin/subscribers">Subscribers</a>
+</nav>
+<main>
+{% block content %}{% endblock %}
+</main>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{% extends "_base.html" %}
+{% block content %}
+<h1>Briefings</h1>
+<table>
+<tr><th>#</th><th>Week of</th><th>Status</th><th>Headline</th><th></th></tr>
+{% for b in briefings %}
+<tr>
+  <td>{{ b.number }}</td>
+  <td>{{ b.week_of }}</td>
+  <td>{{ b.status }}</td>
+  <td>{{ b.headline }}</td>
+  <td><a href="/admin/briefings/{{ b.id }}">Edit</a></td>
+</tr>
+{% endfor %}
+</table>
+{% endblock %}

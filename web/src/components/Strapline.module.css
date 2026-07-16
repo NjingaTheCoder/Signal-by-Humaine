@@ -1,0 +1,17 @@
+.bar {
+  border-bottom: 1px solid var(--border-hairline);
+  background: var(--base-2);
+}
+
+.inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 10px 24px;
+  font-size: var(--fs-small);
+  color: var(--contrast-2);
+}
+
+.inner strong {
+  color: var(--contrast);
+  font-weight: 700;
+}

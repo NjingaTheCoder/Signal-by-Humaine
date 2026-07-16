@@ -1,0 +1,32 @@
+{% extends "_base.html" %}
+{% block content %}
+<h1>Jobs board</h1>
+<p style="color:#666;font-size:14px;">
+  Roles added here (source blank) are Humaine's own postings. Rows tagged "RemoteOK" are
+  ingested industry listings, refreshed daily — editing/deactivating them is fine but they'll
+  reappear on the next ingestion run if still live on RemoteOK.
+</p>
+<form method="post" action="/admin/jobs-board">
+  <label>Role</label><input name="role" required>
+  <label>Lab</label><input name="lab">
+  <label>Location</label><input name="location">
+  <label>Type</label><input name="type" placeholder="full-time / contract">
+  <label>Apply URL</label><input name="apply_url">
+  <button type="submit">Add</button>
+</form>
+<table>
+<tr><th>Role</th><th>Lab</th><th>Location</th><th>Type</th><th>Source</th><th>Active</th><th></th></tr>
+{% for j in jobs %}
+<tr>
+  <td>{{ j.role }}</td><td>{{ j.lab or "" }}</td><td>{{ j.location or "" }}</td><td>{{ j.type or "" }}</td>
+  <td>{{ j.source or "Humaine" }}</td>
+  <td>{{ "yes" if j.active else "no" }}</td>
+  <td>
+    <form method="post" action="/admin/jobs-board/{{ j.id }}/toggle">
+      <button type="submit">{{ "Deactivate" if j.active else "Activate" }}</button>
+    </form>
+  </td>
+</tr>
+{% endfor %}
+</table>
+{% endblock %}
